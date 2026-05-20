@@ -6,13 +6,15 @@ function Footer() {
             borderTop: '1px solid var(--border)',
             padding: '2.5rem 0',
         }}>
-            <div className="container" style={{
+            {/* Added className "footer-container" here */}
+            <div className="container footer-container" style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
             }}>
 
-                <a href="#hero" style={{
+                {/* Added className "footer-logo" here */}
+                <a href="#hero" className="footer-logo" style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '1rem',
                     color: 'var(--text)',
@@ -20,7 +22,8 @@ function Footer() {
                     ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
                 </a>
 
-                <p style={{
+                {/* Added className "footer-copyright" here */}
+                <p className="footer-copyright" style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.75rem',
                     color: 'var(--muted)',
@@ -28,7 +31,8 @@ function Footer() {
                     © {year} Ciano Webs&nbsp;·&nbsp;All rights reserved.
                 </p>
 
-                <div style={{ display: 'flex', gap: '1.5rem' }}>
+                {/* Added className "footer-socials" here */}
+                <div className="footer-socials" style={{ display: 'flex', gap: '1.5rem' }}>
                     {[
                         { label: 'GitHub', url: 'https://github.com/maayan44' },
                         { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maayan-marciano/' },
