@@ -261,22 +261,26 @@ select.form-input option {
 /* Mobile View Fixes for Footer (Under 768px screens) */
 @media (max-width: 768px) {
     .footer-container {
-        flex-wrap: wrap; /* Allows items to drop down to a new line */
-        gap: 1.5rem;     /* Adds vertical space between the rows */
+        display: grid !important; /* Overrides the inline flex layout */
+        grid-template-columns: auto auto; /* Forces 2 columns side-by-side */
+        justify-content: space-between; /* Pushes logo left, socials right */
+        row-gap: 1.5rem; /* Adds space between Row 1 and Row 2 */
+        align-items: center;
     }
 
     .footer-logo {
-        order: 1; /* Keeps logo top-left */
+        /* Automatically stays on Row 1, Left */
     }
 
     .footer-socials {
-        order: 2; /* Keeps social links top-right */
+        /* Automatically stays on Row 1, Right */
+        gap: 1rem !important; /* Slightly tightens the link spacing so they fit on small mobile screens */
     }
 
     .footer-copyright {
-        order: 3;           /* Forces the copyright onto the second row */
-        width: 100%;        /* Makes it take up the full row width */
-        text-align: center; /* Centers the text under the logo/links */
+        grid-column: span 2; /* Forces the copyright to take up the entire 2nd row */
+        text-align: center;  /* Centers the text perfectly */
         margin: 0;
+        width: 100%;
     }
 }
