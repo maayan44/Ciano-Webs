@@ -258,7 +258,62 @@ select.form-input option {
   color: var(--accent);
 }
 
+.nav-links-list {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+.nav-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem 2rem;
+  border-top: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.98);
+}
+
+.nav-mobile-link {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-mobile-link:hover {
+  color: var(--text);
+}
+
+
 @media (max-width: 768px) {
+
+  /* Navbar */
+  .nav-links-list {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
 
   /* About */
   .about-grid {

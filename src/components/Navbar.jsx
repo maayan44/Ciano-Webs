@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +75,7 @@ function Navbar() {
           ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
         </a>
 
-        <ul style={ulStyle}>
+        <ul className="nav-links-list">
           {navLinks.map((item) => (
             <li key={item}>
               <a href={'#' + item.toLowerCase()} className="nav-link">
@@ -89,7 +90,37 @@ function Navbar() {
           </li>
         </ul>
 
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className="bar" />
+          <span className="bar" />
+          <span className="bar" />
+        </button>
+
       </div>
+
+      {menuOpen && (
+        <div className="nav-mobile-menu">
+          {['Work', 'Services', 'About', 'Contact'].map((item) => (
+            <a
+              key={item}
+              href={'#' + item.toLowerCase()}
+              className="nav-mobile-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {item}
+            </a>
+          ))}
+          <a
+            href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
+            Let's Talk
+          </a>
+        </div>
+      )}
+
     </nav>
   )
 }
