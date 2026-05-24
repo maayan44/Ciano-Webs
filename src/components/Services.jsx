@@ -2,7 +2,7 @@ const services = [
     {
         number: '01',
         title: 'Custom Websites',
-        description: 'Fully custom-built sites from scratch. No templates, no shortcuts. every pixel has a reason.',
+        description: 'Fully custom-built sites from scratch. No templates, no shortcuts. Every pixel has a reason.',
     },
     {
         number: '02',

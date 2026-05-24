@@ -29,6 +29,24 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!form.from_name.trim()) {
+      setStatus('name')
+      return
+    }
+    if (!form.from_email.trim() || !form.from_email.includes('@')) {
+      setStatus('email')
+      return
+    }
+    if (!form.service_type) {
+      setStatus('service')
+      return
+    }
+    if (!form.message.trim()) {
+      setStatus('message')
+      return
+    }
+
     setLoading(true)
     setStatus(null)
 
@@ -128,6 +146,26 @@ function Contact() {
               </button>
             </div>
 
+            {status === 'name' && (
+              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                ✗ Please enter your name.
+              </p>
+            )}
+            {status === 'email' && (
+              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                ✗ Please enter a valid email address.
+              </p>
+            )}
+            {status === 'service' && (
+              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                ✗ Please select a service.
+              </p>
+            )}
+            {status === 'message' && (
+              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                ✗ Please write a message.
+              </p>
+            )}
             {status === 'success' && (
               <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
                 ✓ Message sent — I'll get back to you soon.
@@ -135,7 +173,7 @@ function Contact() {
             )}
             {status === 'error' && (
               <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Something went wrong. Try again or email directly.
+                ✗ Something went wrong. Try again or reach out on WhatsApp.
               </p>
             )}
 
