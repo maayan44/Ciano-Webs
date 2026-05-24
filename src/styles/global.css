@@ -259,6 +259,24 @@ select.form-input option {
 }
 
 @media (max-width: 768px) {
+
+  /* About */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+
+  .about-grid .section-title {
+    font-size: 2rem !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  .btn-primary {
+    white-space: nowrap !important;
+  }
+
+  /* Footer */
   .footer-container {
     display: grid !important;
     grid-template-columns: auto auto !important;

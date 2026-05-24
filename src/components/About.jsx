@@ -8,7 +8,7 @@ function About() {
     <section id="about" className="section">
       <div className="container">
 
-        <div style={{
+        <div className="about-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           gap: '5rem',
