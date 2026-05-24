@@ -64,8 +64,8 @@ function Hero() {
           lineHeight: '1.7',
           marginBottom: '2.5rem',
         }}>
-          Ciano Webs crafts fast, clean, and purposeful websites —
-          built to convert visitors into customers.
+          Ciano Webs crafts fast, clean, and purposeful websites.
+          built to convert visits into customers.
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
