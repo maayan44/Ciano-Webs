@@ -28,7 +28,7 @@ function About() {
               marginBottom: '1.5rem',
               fontSize: '0.95rem',
             }}>
-              I'm Ciano — a web developer based in Israel building sites
+              I'm Ciano, a web developer based in Israel building sites
               that look sharp, load fast, and actually work for the
               businesses behind them.
             </p>
@@ -39,7 +39,7 @@ function About() {
               marginBottom: '2rem',
             }}>
               From single-page landing sites to full-stack platforms —
-              I care about every pixel, every interaction, and every
+              we care about every pixel, every interaction, and every
               millisecond of load time.
             </p>
             <a href="#contact" className="btn-primary">
