@@ -17,7 +17,7 @@ const services = [
     {
         number: '04',
         title: 'Shopify & E-Commerce',
-        description: 'Custom Shopify stores built to sell. Branded, fast, and optimized for the full customer journey.',
+        description: 'Full e-commerce builds, from Shopify boutique stores to custom React platforms. Branded, fast and optimized for the full customer journey.',
     },
 ]
 

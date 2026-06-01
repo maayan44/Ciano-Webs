@@ -104,7 +104,7 @@ function Navbar() {
 
       {menuOpen && (
         <div className="nav-mobile-menu">
-          {['Work', 'Services', 'About', 'Contact'].map((item) => (
+          {['Work', 'Services', 'About'].map((item) => (
             <a
               key={item}
               href={'#' + item.toLowerCase()}

@@ -28,8 +28,8 @@ function About() {
               marginBottom: '1.5rem',
               fontSize: '0.95rem',
             }}>
-              I'm Ciano, a web developer based in Israel building sites
-              that look sharp, load fast, and actually work for the
+              Building sites that look sharp, 
+              load fast, and actually work for the
               businesses behind them.
             </p>
             <p style={{
