@@ -1,4 +1,54 @@
+import { useState, useEffect } from 'react'
+
+const phrases = [
+  'custom websites.',
+  'e-commerce.',
+  'landing pages.',
+  'Shopify stores.',
+]
+
 function Hero() {
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [displayed, setDisplayed] = useState('')
+  const [deleting, setDeleting] = useState(false)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    const current = phrases[phraseIndex]
+
+    if (paused) {
+      const timeout = setTimeout(() => {
+        setPaused(false)
+        setDeleting(true)
+      }, 2000)
+      return () => clearTimeout(timeout)
+    }
+
+    if (!deleting && displayed.length < current.length) {
+      const timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, displayed.length + 1))
+      }, 60)
+      return () => clearTimeout(timeout)
+    }
+
+    if (!deleting && displayed.length === current.length) {
+      setPaused(true)
+      return
+    }
+
+    if (deleting && displayed.length > 0) {
+      const timeout = setTimeout(() => {
+        setDisplayed(current.slice(0, displayed.length - 1))
+      }, 30)
+      return () => clearTimeout(timeout)
+    }
+
+    if (deleting && displayed.length === 0) {
+      setDeleting(false)
+      setPhraseIndex((i) => (i + 1) % phrases.length)
+    }
+  }, [displayed, deleting, paused, phraseIndex])
+
   return (
     <section id="hero" style={{
       minHeight: '100vh',
@@ -57,15 +107,27 @@ function Hero() {
           for themselves.
         </h1>
 
+        {/* Typing line */}
         <p style={{
-          fontSize: '1.1rem',
-          color: 'var(--muted)',
-          maxWidth: '480px',
-          lineHeight: '1.7',
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'clamp(1rem, 2.5vw, 1.4rem)',
+          color: 'var(--text)',
           marginBottom: '2.5rem',
+          minHeight: '2rem',
         }}>
-          Ciano Webs crafts fast, clean, and purposeful websites.
-          built to convert visits into customers.
+          Specializing in{' '}
+          <span style={{ color: 'var(--accent)' }}>
+            {displayed}
+          </span>
+          <span style={{
+            display: 'inline-block',
+            width: '2px',
+            height: '1.2em',
+            background: 'var(--accent)',
+            marginLeft: '2px',
+            verticalAlign: 'middle',
+            animation: 'blink 1s step-end infinite',
+          }} />
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
