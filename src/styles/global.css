@@ -184,6 +184,10 @@ img  { max-width: 100%; display: block; }
 
 .nav-mobile-link:hover { color: var(--text); }
 
+.nav-link-active {
+  color: var(--accent) !important;
+}
+
 /* ────────────────────────────────────────
    PORTFOLIO
 ──────────────────────────────────────── */

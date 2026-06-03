@@ -50,8 +50,8 @@ function Cursor() {
     let animFrame
     const animate = () => {
       setTrail((prev) => ({
-        x: prev.x + (pos.x - prev.x) * 0.12,
-        y: prev.y + (pos.y - prev.y) * 0.12,
+        x: prev.x + (pos.x - prev.x) * 0.4,
+        y: prev.y + (pos.y - prev.y) * 0.4,
       }))
       animFrame = requestAnimationFrame(animate)
     }

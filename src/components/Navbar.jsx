@@ -3,11 +3,24 @@ import { useState, useEffect } from 'react'
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [active, setActive] = useState('')
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
+
+      const sections = ['work', 'services', 'about', 'contact']
+      for (const id of sections) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActive(id)
+          break
+        }
+      }
     }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -39,33 +52,7 @@ function Navbar() {
     letterSpacing: '0.05em',
   }
 
-  const ulStyle = {
-    display: 'flex',
-    gap: '2.5rem',
-    listStyle: 'none',
-    alignItems: 'center',
-  }
-
-  const linkStyle = {
-    fontSize: '0.9rem',
-    color: 'var(--muted)',
-    fontWeight: '500',
-    transition: 'color 0.2s',
-    cursor: 'pointer',
-  }
-
-  const ctaStyle = {
-    fontFamily: 'var(--font-mono)',
-    fontSize: '0.8rem',
-    color: 'var(--accent)',
-    border: '1px solid var(--accent)',
-    padding: '0.4rem 1rem',
-    borderRadius: '4px',
-    transition: 'background 0.2s',
-    cursor: 'pointer',
-  }
-
-  const navLinks = ['Work', 'Services', 'About', 'Contact']
+  const navLinks = ['Services', 'Work', 'About', 'Contact']
 
   return (
     <nav style={navStyle}>
@@ -78,7 +65,10 @@ function Navbar() {
         <ul className="nav-links-list">
           {navLinks.map((item) => (
             <li key={item}>
-              <a href={'#' + item.toLowerCase()} className="nav-link">
+              <a
+                href={'#' + item.toLowerCase()}
+                className={active === item.toLowerCase() ? 'nav-link nav-link-active' : 'nav-link'}
+              >
                 {item}
               </a>
             </li>
@@ -114,8 +104,7 @@ function Navbar() {
               {item}
             </a>
           ))}
-          <a
-            href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
+          <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
             Let's Talk
           </a>
         </div>
