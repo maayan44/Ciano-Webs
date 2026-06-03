@@ -295,6 +295,13 @@ select.form-input option {
 .footer-link:hover { color: var(--accent); }
 
 /* ────────────────────────────────────────
+   CUSTOM CURSOR
+──────────────────────────────────────── */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* ────────────────────────────────────────
    MOBILE — max-width: 768px
 ──────────────────────────────────────── */
 @media (max-width: 768px) {

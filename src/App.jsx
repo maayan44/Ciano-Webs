@@ -7,6 +7,7 @@ import Portfolio from './components/Portfolio'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Cursor from './components/Cursor'
 
 function App() {
   const [progress, setProgress] = useState(0)
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <>
+      <Cursor />
       {/* Scroll progress bar */}
       <div style={{
         position: 'fixed',
