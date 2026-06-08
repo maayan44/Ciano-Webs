@@ -7,6 +7,9 @@ function Cursor() {
   const [clicking, setClicking] = useState(false)
   const [hovering, setHovering] = useState(false)
 
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+  if (isTouchDevice) return null
+
   useEffect(() => {
     const handleMove = (e) => {
       setPos({ x: e.clientX, y: e.clientY })
