@@ -62,14 +62,13 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section" aria-labelledby="contact-heading">
       <div className="container">
 
         <div style={{ maxWidth: '640px' }}>
-          <p className="section-label">Contact</p>
-          <h2 className="section-title">
-            Got a project<br />
-            <span className="accent">in mind?</span>
+          <p className="section-label" aria-hidden="true">Contact</p>
+          <h2 id="contact-heading" className="section-title">
+            Got a project <span className="accent">in mind?</span>
           </h2>
           <p style={{
             color: 'var(--muted)',
@@ -80,40 +79,59 @@ function Contact() {
             Tell me what you're looking for and I'll get back to you within 24 hours.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <form
+            noValidate
+            onSubmit={handleSubmit}
+            aria-label="Contact form"
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+          >
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
               <div>
-                <label className="form-label">Name</label>
+                <label htmlFor="from_name" className="form-label">Name</label>
                 <input
+                  id="from_name"
                   className="form-input"
                   type="text"
                   name="from_name"
                   placeholder="Your name"
                   value={form.from_name}
                   onChange={handleChange}
+                  aria-required="true"
+                  aria-invalid={status === 'name' ? 'true' : 'false'}
+                  aria-describedby={status === 'name' ? 'error-name' : undefined}
+                  autoComplete="name"
                 />
               </div>
               <div>
-                <label className="form-label">Email</label>
+                <label htmlFor="from_email" className="form-label">Email</label>
                 <input
+                  id="from_email"
                   className="form-input"
                   type="email"
                   name="from_email"
                   placeholder="your@email.com"
                   value={form.from_email}
                   onChange={handleChange}
+                  aria-required="true"
+                  aria-invalid={status === 'email' ? 'true' : 'false'}
+                  aria-describedby={status === 'email' ? 'error-email' : undefined}
+                  autoComplete="email"
                 />
               </div>
             </div>
 
             <div>
-              <label className="form-label">Service</label>
+              <label htmlFor="service_type" className="form-label">Service</label>
               <select
+                id="service_type"
                 className="form-input"
                 name="service_type"
                 value={form.service_type}
                 onChange={handleChange}
+                aria-required="true"
+                aria-invalid={status === 'service' ? 'true' : 'false'}
+                aria-describedby={status === 'service' ? 'error-service' : undefined}
               >
                 <option value="">What are you looking for?</option>
                 {services.map((s) => (
@@ -123,61 +141,69 @@ function Contact() {
             </div>
 
             <div>
-              <label className="form-label">Message</label>
+              <label htmlFor="message" className="form-label">Message</label>
               <textarea
+                id="message"
                 className="form-input"
                 name="message"
                 placeholder="Tell me about your project..."
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
+                aria-required="true"
+                aria-invalid={status === 'message' ? 'true' : 'false'}
+                aria-describedby={status === 'message' ? 'error-message' : undefined}
                 style={{ resize: 'vertical' }}
               />
             </div>
 
             <div>
               <button
+                type="submit"
                 className="btn-primary"
-                onClick={handleSubmit}
                 disabled={loading}
+                aria-disabled={loading}
+                aria-busy={loading}
                 style={{ opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer', border: 'none' }}
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
             </div>
 
-            {status === 'name' && (
-              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Please enter your name.
-              </p>
-            )}
-            {status === 'email' && (
-              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Please enter a valid email address.
-              </p>
-            )}
-            {status === 'service' && (
-              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Please select a service.
-              </p>
-            )}
-            {status === 'message' && (
-              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Please write a message.
-              </p>
-            )}
-            {status === 'success' && (
-              <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✓ Message sent — I'll get back to you soon.
-              </p>
-            )}
-            {status === 'error' && (
-              <p style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                ✗ Something went wrong. Try again or reach out on WhatsApp.
-              </p>
-            )}
+            <div aria-live="polite" aria-atomic="true">
+              {status === 'name' && (
+                <p id="error-name" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✗ Please enter your name.
+                </p>
+              )}
+              {status === 'email' && (
+                <p id="error-email" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✗ Please enter a valid email address.
+                </p>
+              )}
+              {status === 'service' && (
+                <p id="error-service" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✗ Please select a service.
+                </p>
+              )}
+              {status === 'message' && (
+                <p id="error-message" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✗ Please write a message.
+                </p>
+              )}
+              {status === 'success' && (
+                <p role="alert" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✓ Message sent — I'll get back to you soon.
+                </p>
+              )}
+              {status === 'error' && (
+                <p role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+                  ✗ Something went wrong. Try again or reach out on WhatsApp.
+                </p>
+              )}
+            </div>
 
-          </div>
+          </form>
         </div>
 
       </div>

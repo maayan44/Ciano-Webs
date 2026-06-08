@@ -2,7 +2,7 @@ function Footer() {
     const year = new Date().getFullYear()
 
     return (
-        <footer style={{
+        <footer aria-label="Site footer" style={{
             borderTop: '1px solid var(--border)',
             padding: '2.5rem 0',
         }}>
@@ -12,11 +12,16 @@ function Footer() {
                 justifyContent: 'space-between',
             }}>
 
-                <a href="#hero" className="footer-logo" style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '1rem',
-                    color: 'var(--text)',
-                }}>
+                <a
+                    href="#hero"
+                    className="footer-logo"
+                    aria-label="Ciano Webs — back to top"
+                    style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '1rem',
+                        color: 'var(--text)',
+                    }}
+                >
                     ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
                 </a>
 
@@ -28,7 +33,7 @@ function Footer() {
                     © {year} Ciano Webs&nbsp;·&nbsp;All rights reserved.
                 </p>
 
-                <div className="footer-socials" style={{ display: 'flex', gap: '1.5rem' }}>
+                <nav aria-label="Social links" className="footer-socials" style={{ display: 'flex', gap: '1.5rem' }}>
                     {[
                         { label: 'GitHub', url: 'https://github.com/maayan44' },
                         { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maayan-marciano/' },
@@ -40,11 +45,12 @@ function Footer() {
                             target="_blank"
                             rel="noreferrer"
                             className="footer-link"
+                            aria-label={`${link.label} — opens in a new tab`}
                         >
                             {link.label}
                         </a>
                     ))}
-                </div>
+                </nav>
 
             </div>
         </footer>

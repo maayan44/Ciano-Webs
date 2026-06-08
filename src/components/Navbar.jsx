@@ -25,6 +25,15 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && menuOpen) setMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen])
+
   const navStyle = {
     position: 'fixed',
     top: 0,
@@ -55,62 +64,84 @@ function Navbar() {
   const navLinks = ['Services', 'Work', 'About', 'Contact']
 
   return (
-    <nav style={navStyle}>
-      <div className="container" style={containerStyle}>
+    <>
+      {/* Skip link — lets keyboard users jump straight to content */}
+      <a href="#hero" className="skip-link">
+        Skip to main content
+      </a>
 
-        <a href="#hero" style={logoStyle}>
-          ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
-        </a>
+      <nav style={navStyle} role="navigation" aria-label="Main navigation">
+        <div className="container" style={containerStyle}>
 
-        <ul className="nav-links-list">
-          {navLinks.map((item) => (
-            <li key={item}>
+          <a href="#hero" style={logoStyle} aria-label="Ciano Webs — back to top">
+            ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
+          </a>
+
+          <ul className="nav-links-list" role="list">
+            {navLinks.map((item) => (
+              <li key={item}>
+                <a
+                  href={'#' + item.toLowerCase()}
+                  className={active === item.toLowerCase() ? 'nav-link nav-link-active' : 'nav-link'}
+                  aria-current={active === item.toLowerCase() ? 'true' : undefined}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href="#contact" className="nav-cta" aria-label="Let's Talk — go to contact section">
+                Let's Talk
+              </a>
+            </li>
+          </ul>
+
+          <button
+            className="nav-hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span className="bar" />
+            <span className="bar" />
+            <span className="bar" />
+          </button>
+
+        </div>
+
+        {menuOpen && (
+          <div
+            id="mobile-menu"
+            className="nav-mobile-menu"
+            role="menu"
+            aria-label="Mobile navigation"
+          >
+            {['Work', 'Services', 'About'].map((item) => (
               <a
+                key={item}
                 href={'#' + item.toLowerCase()}
-                className={active === item.toLowerCase() ? 'nav-link nav-link-active' : 'nav-link'}
+                className="nav-mobile-link"
+                role="menuitem"
+                onClick={() => setMenuOpen(false)}
               >
                 {item}
               </a>
-            </li>
-          ))}
-          <li>
-            <a href="#contact" className="nav-cta">
+            ))}
+            <a
+              href="#contact"
+              className="nav-cta"
+              role="menuitem"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Let's Talk — go to contact section"
+            >
               Let's Talk
             </a>
-          </li>
-        </ul>
+          </div>
+        )}
 
-        <button
-          className="nav-hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
-        </button>
-
-      </div>
-
-      {menuOpen && (
-        <div className="nav-mobile-menu">
-          {['Work', 'Services', 'About'].map((item) => (
-            <a
-              key={item}
-              href={'#' + item.toLowerCase()}
-              className="nav-mobile-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item}
-            </a>
-          ))}
-          <a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>
-            Let's Talk
-          </a>
-        </div>
-      )}
-
-    </nav>
+      </nav>
+    </>
   )
 }
 

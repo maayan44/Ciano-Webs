@@ -5,7 +5,7 @@ const stack = [
 
 function About() {
   return (
-    <section id="about" className="section">
+    <section id="about" className="section" aria-labelledby="about-heading">
       <div className="container">
 
         <div className="about-grid" style={{
@@ -17,10 +17,9 @@ function About() {
 
           {/* Left */}
           <div>
-            <p className="section-label">About</p>
-            <h2 className="section-title">
-              A developer who<br />
-              <span className="accent">sweats the details</span>
+            <p className="section-label" aria-hidden="true">About</p>
+            <h2 id="about-heading" className="section-title">
+              A developer who <span className="accent">sweats the details</span>
             </h2>
             <p style={{
               color: 'var(--muted)',
@@ -28,7 +27,7 @@ function About() {
               marginBottom: '1.5rem',
               fontSize: '0.95rem',
             }}>
-              Building sites that look sharp, 
+              Building sites that look sharp,
               load fast, and actually work for the
               businesses behind them.
             </p>
@@ -42,42 +41,52 @@ function About() {
               we care about every pixel, every interaction, and every
               millisecond of load time.
             </p>
-            <a href="#contact" className="btn-primary">
+            <a href="#contact" className="btn-primary" aria-label="Work with me — go to contact section">
               Work With Me
             </a>
           </div>
 
           {/* Right */}
           <div>
-            <p style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              color: 'var(--accent)',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              marginBottom: '1.25rem',
-            }}>
+            <p
+              aria-hidden="true"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                color: 'var(--accent)',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                marginBottom: '1.25rem',
+              }}
+            >
               Tech Stack
             </p>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.75rem',
-            }}>
+
+            <ul
+              role="list"
+              aria-label="Tech stack"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.75rem',
+                padding: 0,
+                listStyle: 'none',
+              }}
+            >
               {stack.map((tech) => (
-                <span key={tech} className="stack-tag">
-                  {tech}
-                </span>
+                <li key={tech} className="stack-tag">{tech}</li>
               ))}
-            </div>
+            </ul>
 
             {/* Stats */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1.5rem',
-              marginTop: '3rem',
-            }}>
+            <dl
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '1.5rem',
+                marginTop: '3rem',
+              }}
+            >
               {[
                 { number: '10+', label: 'Projects delivered' },
                 { number: '100%', label: 'Custom built' },
@@ -88,7 +97,7 @@ function About() {
                   borderLeft: '2px solid var(--accent)',
                   paddingLeft: '1rem',
                 }}>
-                  <p style={{
+                  <dd style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '1.75rem',
                     fontWeight: '700',
@@ -97,16 +106,16 @@ function About() {
                     marginBottom: '0.35rem',
                   }}>
                     {stat.number}
-                  </p>
-                  <p style={{
+                  </dd>
+                  <dt style={{
                     fontSize: '0.8rem',
                     color: 'var(--muted)',
                   }}>
                     {stat.label}
-                  </p>
+                  </dt>
                 </div>
               ))}
-            </div>
+            </dl>
 
           </div>
         </div>
