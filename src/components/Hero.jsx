@@ -129,14 +129,9 @@ function Hero() {
           }}
         >
           Specializing in{' '}
-          <span
-            style={{ color: 'var(--accent)' }}
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            {phrases[phraseIndex]}
+          <span style={{ color: 'var(--accent)' }}>
+            {displayed}
           </span>
-
           <span
             aria-hidden="true"
             style={{
@@ -149,6 +144,21 @@ function Hero() {
               animation: 'blink 1s step-end infinite',
             }}
           />
+          {/* Screen reader only — announces full phrase, not mid-type characters */}
+          <span
+            aria-live="polite"
+            aria-atomic="true"
+            style={{
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden',
+              clip: 'rect(0,0,0,0)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {phrases[phraseIndex]}
+          </span>
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

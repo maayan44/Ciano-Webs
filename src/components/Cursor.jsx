@@ -8,9 +8,10 @@ function Cursor() {
   const [hovering, setHovering] = useState(false)
 
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
-  if (isTouchDevice) return null
 
   useEffect(() => {
+    if (isTouchDevice) return
+
     const handleMove = (e) => {
       setPos({ x: e.clientX, y: e.clientY })
       setVisible(true)
@@ -20,7 +21,6 @@ function Cursor() {
     const handleMouseUp = () => setClicking(false)
     const handleLeave = () => setVisible(false)
     const handleEnter = () => setVisible(true)
-
     const handleHover = () => setHovering(true)
     const handleUnhover = () => setHovering(false)
 
@@ -47,9 +47,10 @@ function Cursor() {
         el.removeEventListener('mouseleave', handleUnhover)
       })
     }
-  }, [])
+  }, [isTouchDevice])
 
   useEffect(() => {
+    if (isTouchDevice) return
     let animFrame
     const animate = () => {
       setTrail((prev) => ({
@@ -60,13 +61,12 @@ function Cursor() {
     }
     animFrame = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(animFrame)
-  }, [pos])
+  }, [pos, isTouchDevice])
 
-  if (!visible) return null
+  if (isTouchDevice || !visible) return null
 
   return (
     <>
-      {/* Dot — follows cursor exactly */}
       <div style={{
         position: 'fixed',
         top: pos.y,
@@ -81,7 +81,6 @@ function Cursor() {
         transition: 'width 0.1s, height 0.1s',
       }} />
 
-      {/* Ring — trails behind */}
       <div style={{
         position: 'fixed',
         top: trail.y,
