@@ -9,7 +9,7 @@ function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
 
-      const sections = ['work', 'services', 'about', 'contact']
+      const sections = ['services', 'work', 'about', 'contact']
       for (const id of sections) {
         const el = document.getElementById(id)
         if (!el) continue
@@ -117,7 +117,7 @@ function Navbar() {
             role="menu"
             aria-label="Mobile navigation"
           >
-            {['Work', 'Services', 'About'].map((item) => (
+            {['Services', 'Work', 'About'].map((item) => (
               <a
                 key={item}
                 href={'#' + item.toLowerCase()}
