@@ -10,15 +10,18 @@ function Navbar() {
       setScrolled(window.scrollY > 50)
 
       const sections = ['services', 'work', 'about', 'contact']
+      let found = false
       for (const id of sections) {
         const el = document.getElementById(id)
         if (!el) continue
         const rect = el.getBoundingClientRect()
-        if (rect.top <= 150 && rect.bottom >= 150) {
+        if (rect.top <= 380 && rect.bottom >= 380) {
           setActive(id)
+          found = true
           break
         }
       }
+      if (!found) setActive('')
     }
 
     window.addEventListener('scroll', handleScroll)
