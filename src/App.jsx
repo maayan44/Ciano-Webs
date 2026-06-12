@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles/global.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -8,8 +9,9 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Cursor from './components/Cursor'
+import Privacy from './components/Privacy'
 
-function App() {
+function MainPage() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
@@ -24,8 +26,6 @@ function App() {
 
   return (
     <>
-      <Cursor />
-      {/* Scroll progress bar */}
       <div style={{
         position: 'fixed',
         top: 0,
@@ -36,7 +36,6 @@ function App() {
         zIndex: 200,
         transition: 'width 0.1s linear',
       }} />
-
       <Navbar />
       <main>
         <Hero />
@@ -47,6 +46,18 @@ function App() {
       </main>
       <Footer />
     </>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Cursor />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/privacy" element={<Privacy />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

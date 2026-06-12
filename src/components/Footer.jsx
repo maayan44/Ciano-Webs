@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Footer() {
     const year = new Date().getFullYear()
 
@@ -30,7 +32,11 @@ function Footer() {
                     fontSize: '0.75rem',
                     color: 'var(--muted)',
                 }}>
-                    © {year} Ciano Webs&nbsp;·&nbsp;All rights reserved.
+                    © {year} Ciano Webs&nbsp;·&nbsp;
+                    <Link to="/privacy" style={{ color: 'var(--muted)', textDecoration: 'underline' }}>
+                        Privacy Policy
+                    </Link>
+                    &nbsp;·&nbsp;All rights reserved.
                 </p>
 
                 <nav aria-label="Social links" className="footer-socials" style={{ display: 'flex', gap: '1.5rem' }}>
