@@ -1,6 +1,6 @@
 import { projects } from '../data/projects'
 
-function Portfolio() {
+const Portfolio = () => {
   return (
     <section
       id="work"

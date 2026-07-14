@@ -13,7 +13,7 @@ const services = [
   'Other',
 ]
 
-function Contact() {
+const Contact = () => {
   const [form, setForm] = useState({
     from_name: '',
     from_email: '',

@@ -7,7 +7,7 @@ const phrases = [
   'Shopify stores.',
 ]
 
-function Hero() {
+const Hero = () => {
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [deleting, setDeleting] = useState(false)

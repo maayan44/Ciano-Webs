@@ -3,7 +3,7 @@ const stack = [
   'MongoDB', 'Shopify', 'JavaScript', 'CSS',
 ]
 
-function About() {
+const About = () => {
   return (
     <section id="about" className="section" aria-labelledby="about-heading">
       <div className="container">

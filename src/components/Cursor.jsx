@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-function Cursor() {
+const Cursor = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [trail, setTrail] = useState({ x: 0, y: 0 })
   const [visible, setVisible] = useState(false)

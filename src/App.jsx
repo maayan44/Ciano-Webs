@@ -11,7 +11,7 @@ import Footer from './components/Footer'
 import Cursor from './components/Cursor'
 import Privacy from './components/Privacy'
 
-function MainPage() {
+const MainPage = () => {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function MainPage() {
   )
 }
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Cursor />

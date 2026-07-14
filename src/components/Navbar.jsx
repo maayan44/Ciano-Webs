@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Navbar() {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')

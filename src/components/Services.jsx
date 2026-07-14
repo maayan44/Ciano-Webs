@@ -21,7 +21,7 @@ const services = [
     },
 ]
 
-function Services() {
+const Services = () => {
     return (
         <section
             id="services"
