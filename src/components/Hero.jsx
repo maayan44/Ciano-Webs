@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useTypewriter } from '../hooks/useTypewriter'
 
 const phrases = [
   'custom websites.',
@@ -8,46 +8,7 @@ const phrases = [
 ]
 
 const Hero = () => {
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const [displayed, setDisplayed] = useState('')
-  const [deleting, setDeleting] = useState(false)
-  const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    const current = phrases[phraseIndex]
-
-    if (paused) {
-      const timeout = setTimeout(() => {
-        setPaused(false)
-        setDeleting(true)
-      }, 2000)
-      return () => clearTimeout(timeout)
-    }
-
-    if (!deleting && displayed.length < current.length) {
-      const timeout = setTimeout(() => {
-        setDisplayed(current.slice(0, displayed.length + 1))
-      }, 60)
-      return () => clearTimeout(timeout)
-    }
-
-    if (!deleting && displayed.length === current.length) {
-      setPaused(true)
-      return
-    }
-
-    if (deleting && displayed.length > 0) {
-      const timeout = setTimeout(() => {
-        setDisplayed(current.slice(0, displayed.length - 1))
-      }, 30)
-      return () => clearTimeout(timeout)
-    }
-
-    if (deleting && displayed.length === 0) {
-      setDeleting(false)
-      setPhraseIndex((i) => (i + 1) % phrases.length)
-    }
-  }, [displayed, deleting, paused, phraseIndex])
+  const { displayed, phraseIndex } = useTypewriter(phrases)
 
   return (
     <section

@@ -1,67 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCustomCursor } from '../hooks/useCustomCursor'
 
 const Cursor = () => {
-  const [pos, setPos] = useState({ x: 0, y: 0 })
-  const [trail, setTrail] = useState({ x: 0, y: 0 })
-  const [visible, setVisible] = useState(false)
-  const [clicking, setClicking] = useState(false)
-  const [hovering, setHovering] = useState(false)
-
-  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
-
-  useEffect(() => {
-    if (isTouchDevice) return
-
-    const handleMove = (e) => {
-      setPos({ x: e.clientX, y: e.clientY })
-      setVisible(true)
-    }
-
-    const handleMouseDown = () => setClicking(true)
-    const handleMouseUp = () => setClicking(false)
-    const handleLeave = () => setVisible(false)
-    const handleEnter = () => setVisible(true)
-    const handleHover = () => setHovering(true)
-    const handleUnhover = () => setHovering(false)
-
-    const interactables = document.querySelectorAll('a, button')
-    interactables.forEach((el) => {
-      el.addEventListener('mouseenter', handleHover)
-      el.addEventListener('mouseleave', handleUnhover)
-    })
-
-    window.addEventListener('mousemove', handleMove)
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('mouseup', handleMouseUp)
-    document.documentElement.addEventListener('mouseleave', handleLeave)
-    document.documentElement.addEventListener('mouseenter', handleEnter)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMove)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
-      document.documentElement.removeEventListener('mouseleave', handleLeave)
-      document.documentElement.removeEventListener('mouseenter', handleEnter)
-      interactables.forEach((el) => {
-        el.removeEventListener('mouseenter', handleHover)
-        el.removeEventListener('mouseleave', handleUnhover)
-      })
-    }
-  }, [isTouchDevice])
-
-  useEffect(() => {
-    if (isTouchDevice) return
-    let animFrame
-    const animate = () => {
-      setTrail((prev) => ({
-        x: prev.x + (pos.x - prev.x) * 0.4,
-        y: prev.y + (pos.y - prev.y) * 0.4,
-      }))
-      animFrame = requestAnimationFrame(animate)
-    }
-    animFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animFrame)
-  }, [pos, isTouchDevice])
+  const { pos, trail, visible, clicking, hovering, isTouchDevice } = useCustomCursor()
 
   if (isTouchDevice || !visible) return null
 
