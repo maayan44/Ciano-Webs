@@ -2,6 +2,15 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
+/**
+ * Application entry point.
+ *
+ * Mounts the root App component into the page's root div, wrapped in
+ * StrictMode to surface potential problems during development. Also
+ * logs a small hidden styled console message for anyone
+ * who opens developer tools.
+ */
+
 console.log(`
 %c  Hey, you found this. 👀
 %c  ciano.webs  

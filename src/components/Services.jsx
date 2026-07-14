@@ -21,6 +21,12 @@ const services = [
     },
 ]
 
+/**
+ * Renders the services section of the main page as a grid of cards,
+ * one per entry in the local services array above. Each card shows a
+ * numbered label, a title, and a short description of the service.
+ */
+
 const Services = () => {
     return (
         <section

@@ -53,7 +53,6 @@ const Hero = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
-        {/* Availability badge */}
         <p
           aria-label="Availability status"
           style={{
@@ -105,7 +104,7 @@ const Hero = () => {
               animation: 'blink 1s step-end infinite',
             }}
           />
-          {/* Screen reader only — announces full phrase, not mid-type characters */}
+          {/* Screen reader only, announces the full phrase rather than the mid type characters */}
           <span
             aria-live="polite"
             aria-atomic="true"
@@ -126,14 +125,14 @@ const Hero = () => {
           <a
             href="#work"
             className="btn-primary"
-            aria-label="See my work — scroll to portfolio section"
+            aria-label="See my work, scroll to portfolio section"
           >
             See My Work
           </a>
           <a
             href="#contact"
             className="btn-ghost"
-            aria-label="Start a project — scroll to contact section"
+            aria-label="Start a project, scroll to contact section"
           >
             Start a Project
           </a>

@@ -1,5 +1,13 @@
 import { projects } from '../data/projects'
 
+/**
+ * Renders the selected work section of the main page. Each project
+ * from the shared projects data file is shown as a card containing a
+ * fake browser chrome bar, a live embedded preview of the actual site
+ * using an iframe, and a summary with a link that opens the real site
+ * in a new tab.
+ */
+
 const Portfolio = () => {
   return (
     <section
@@ -29,7 +37,7 @@ const Portfolio = () => {
           {projects.map((project) => (
             <li key={project.id} className="portfolio-card">
 
-              {/* Browser bar */}
+              {/* Decorative browser chrome bar showing the site's domain */}
               <div
                 aria-hidden="true"
                 style={{
@@ -54,7 +62,7 @@ const Portfolio = () => {
                 </span>
               </div>
 
-              {/* Preview iframe */}
+              {/* Inert live preview, not focusable or clickable, purely visual */}
               <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
                 <iframe
                   src={project.url}
@@ -71,7 +79,6 @@ const Portfolio = () => {
                 />
               </div>
 
-              {/* Card info */}
               <div style={{ padding: '1.25rem' }}>
                 <div style={{
                   display: 'flex',
@@ -86,7 +93,7 @@ const Portfolio = () => {
                     target="_blank"
                     rel="noreferrer"
                     className="live-link"
-                    aria-label={`Visit ${project.name} — opens in a new tab`}
+                    aria-label={`Visit ${project.name}, opens in a new tab`}
                   >
                     ↗ Live
                   </a>

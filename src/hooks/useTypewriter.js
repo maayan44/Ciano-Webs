@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 
 /**
- * Cycles through an array of phrases with a typing/pausing/deleting animation.
- * @param {string[]} phrases - phrases to type out in sequence
- * @param {object} [options]
- * @param {number} [options.typeSpeed=60] - ms per character while typing
- * @param {number} [options.deleteSpeed=30] - ms per character while deleting
- * @param {number} [options.pauseTime=2000] - ms to pause after a phrase is fully typed
- * @returns {{ displayed: string, phraseIndex: number }}
+ * Cycles through a list of phrases, animating each one letter by
+ * letter as if it were being typed, then pausing, then deleting it
+ * before moving on to the next phrase in the list. The cycle repeats
+ * forever, looping back to the first phrase once the last one finishes.
  */
+
 export function useTypewriter(phrases, options = {}) {
-  const { typeSpeed = 60, deleteSpeed = 30, pauseTime = 2000 } = options
+  const typeSpeed = options.typeSpeed ?? 60
+  const deleteSpeed = options.deleteSpeed ?? 30
+  const pauseTime = options.pauseTime ?? 2000
 
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [displayed, setDisplayed] = useState('')
@@ -20,6 +20,7 @@ export function useTypewriter(phrases, options = {}) {
   useEffect(() => {
     const current = phrases[phraseIndex]
 
+    // Phrase is fully typed, wait before starting to delete it
     if (paused) {
       const timeout = setTimeout(() => {
         setPaused(false)
@@ -28,6 +29,7 @@ export function useTypewriter(phrases, options = {}) {
       return () => clearTimeout(timeout)
     }
 
+    // Still typing the current phrase, add the next character
     if (!deleting && displayed.length < current.length) {
       const timeout = setTimeout(() => {
         setDisplayed(current.slice(0, displayed.length + 1))
@@ -35,11 +37,13 @@ export function useTypewriter(phrases, options = {}) {
       return () => clearTimeout(timeout)
     }
 
+    // Just finished typing, move into the paused state
     if (!deleting && displayed.length === current.length) {
       setPaused(true)
       return
     }
 
+    // Deleting the current phrase one character at a time
     if (deleting && displayed.length > 0) {
       const timeout = setTimeout(() => {
         setDisplayed(current.slice(0, displayed.length - 1))
@@ -47,6 +51,7 @@ export function useTypewriter(phrases, options = {}) {
       return () => clearTimeout(timeout)
     }
 
+    // Fully deleted, move on to the next phrase in the list
     if (deleting && displayed.length === 0) {
       setDeleting(false)
       setPhraseIndex((i) => (i + 1) % phrases.length)

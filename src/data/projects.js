@@ -1,3 +1,12 @@
+/**
+ * Static list of portfolio entries rendered by the Portfolio component.
+ * Each entry describes one live client project and follows this shape.
+ *
+ * To add a new project, add another object to this array following
+ * the same shape. No other file needs to change, since Portfolio.jsx
+ * reads this array directly.
+ */
+
 export const projects = [
   {
     id: 1,
@@ -16,7 +25,7 @@ export const projects = [
   {
     id: 3,
     name: "Interproduct",
-    description: "Full-stack B2B e-commerce platform with a Hebrew RTL interface. Built with React, Node/Express and MongoDB — including Cloudinary image management and a separate admin panel for products, orders and users.",
+    description: "Full-stack B2B e-commerce platform with a Hebrew RTL interface. Built with React, Node/Express and MongoDB, including Cloudinary image management and a separate admin panel for products, orders and users.",
     url: "https://interproduct.co.il",
     tags: ["Full-Stack", "B2B", "React", "MongoDB"],
   },

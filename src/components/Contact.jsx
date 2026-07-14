@@ -13,6 +13,13 @@ const services = [
   'Other',
 ]
 
+/**
+ * Renders the contact form section of the main page. Collects a
+ * visitor's name, email address, desired service type, and message,
+ * validates each field manually on submit, then sends the data
+ * through EmailJS rather than a custom backend.
+ */
+
 const Contact = () => {
   const [form, setForm] = useState({
     from_name: '',
@@ -193,7 +200,7 @@ const Contact = () => {
               )}
               {status === 'success' && (
                 <p role="alert" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                  ✓ Message sent — I'll get back to you soon.
+                  ✓ Message sent, I'll get back to you soon.
                 </p>
               )}
               {status === 'error' && (

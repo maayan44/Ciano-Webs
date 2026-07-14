@@ -49,6 +49,7 @@ const MainPage = () => {
   )
 }
 
+/** Root component of the application */
 const App = () => {
   return (
     <BrowserRouter>

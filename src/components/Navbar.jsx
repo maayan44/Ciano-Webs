@@ -15,6 +15,8 @@ const Navbar = () => {
         const el = document.getElementById(id)
         if (!el) continue
         const rect = el.getBoundingClientRect()
+        // 380 approximates the vertical center point below the fixed
+        // navbar where a section should be considered the active one
         if (rect.top <= 380 && rect.bottom >= 380) {
           setActive(id)
           found = true
@@ -28,7 +30,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close menu on Escape key
+  // Closes the mobile menu when the visitor presses escape
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && menuOpen) setMenuOpen(false)
@@ -68,7 +70,7 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Skip link — lets keyboard users jump straight to content */}
+      {/* Skip link, hidden until focused by keyboard, lets keyboard users jump straight to content */}
       <a href="#hero" className="skip-link">
         Skip to main content
       </a>
@@ -76,7 +78,7 @@ const Navbar = () => {
       <nav style={navStyle} role="navigation" aria-label="Main navigation">
         <div className="container" style={containerStyle}>
 
-          <a href="#hero" style={logoStyle} aria-label="Ciano Webs — back to top">
+          <a href="#hero" style={logoStyle} aria-label="Ciano Webs, back to top">
             ciano<span style={{ color: 'var(--accent)' }}>.webs</span>
           </a>
 
@@ -93,7 +95,7 @@ const Navbar = () => {
               </li>
             ))}
             <li>
-              <a href="#contact" className="nav-cta" aria-label="Let's Talk — go to contact section">
+              <a href="#contact" className="nav-cta" aria-label="Let's Talk, go to contact section">
                 Let's Talk
               </a>
             </li>
@@ -136,7 +138,7 @@ const Navbar = () => {
               className="nav-cta"
               role="menuitem"
               onClick={() => setMenuOpen(false)}
-              aria-label="Let's Talk — go to contact section"
+              aria-label="Let's Talk, go to contact section"
             >
               Let's Talk
             </a>

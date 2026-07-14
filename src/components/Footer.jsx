@@ -17,7 +17,7 @@ const Footer = () => {
                 <a
                     href="#hero"
                     className="footer-logo"
-                    aria-label="Ciano Webs — back to top"
+                    aria-label="Ciano Webs, back to top"
                     style={{
                         fontFamily: 'var(--font-mono)',
                         fontSize: '1rem',
@@ -51,7 +51,7 @@ const Footer = () => {
                             target="_blank"
                             rel="noreferrer"
                             className="footer-link"
-                            aria-label={`${link.label} — opens in a new tab`}
+                            aria-label={`${link.label}, opens in a new tab`}
                         >
                             {link.label}
                         </a>

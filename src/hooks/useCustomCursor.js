@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
 
 /**
- * Tracks cursor position, click state, and hover-over-interactive-element state,
- * with a smoothed "trailing" position for a lagging cursor ring effect.
- * Automatically disables itself on touch devices.
- * @param {object} [options]
- * @param {number} [options.followSpeed=0.4] - trail lerp factor (0-1, higher = snappier)
- * @returns {{ pos, trail, visible, clicking, hovering, isTouchDevice }}
+ * Tracks the mouse position, click state, and whether the pointer is
+ * currently over an interactive element such as a link or button. Also
+ * produces a smoothed trailing position that follows the raw pointer
+ * position with a slight delay, used to animate a ring style cursor.
  */
+
 export function useCustomCursor(options = {}) {
-  const { followSpeed = 0.4 } = options
+  const followSpeed = options.followSpeed ?? 0.4
 
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [trail, setTrail] = useState({ x: 0, y: 0 })
@@ -19,6 +18,7 @@ export function useCustomCursor(options = {}) {
 
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
 
+  // Attaches listeners for pointer movement, clicks, and hover state
   useEffect(() => {
     if (isTouchDevice) return
 
@@ -59,6 +59,7 @@ export function useCustomCursor(options = {}) {
     }
   }, [isTouchDevice])
 
+  // Runs an animation loop that eases the trail position toward the raw position
   useEffect(() => {
     if (isTouchDevice) return
     let animFrame

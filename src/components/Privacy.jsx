@@ -10,17 +10,20 @@ const Privacy = () => {
 
   return (
     <>
-      <nav style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        padding: '1.25rem 0',
-        borderBottom: '1px solid var(--border)',
-        background: 'rgba(10,10,10,0.95)',
-        backdropFilter: 'blur(12px)',
-      }}>
+      <nav
+        aria-label="Privacy policy navigation"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: '1.25rem 0',
+          borderBottom: '1px solid var(--border)',
+          background: 'rgba(10,10,10,0.95)',
+          backdropFilter: 'blur(12px)',
+        }}
+      >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link to="/" style={{
             fontFamily: 'var(--font-mono)',
@@ -57,6 +60,7 @@ const Privacy = () => {
             Last updated: January {year}
           </p>
 
+          {/* Each entry below renders as one titled paragraph section of the policy */}
           {[
             {
               title: 'What we collect',
