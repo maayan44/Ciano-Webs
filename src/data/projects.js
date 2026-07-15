@@ -12,7 +12,7 @@ export const projects = [
     id: 1,
     name: "Norish",
     description: "A clean, modern and artistic web presence built for one of the most well-known coffee shops in Tel Aviv. Focused on artistic design and a smooth user experience.",
-    url: "https://norish.co.il",
+    url: "https://www.norish.co.il",
     tags: ["Design", "React", "UI/UX"],
   },
   {
