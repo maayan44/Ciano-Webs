@@ -11,8 +11,8 @@ const services = [
     },
     {
         number: '03',
-        title: 'Web Apps',
-        description: 'Interactive experiences built with modern React. Clean code, smooth performance, real results.',
+        title: 'Full-Stack Platforms',
+        description: 'Custom backends, databases and admin panels behind the scenes. Built with React, Node/Express and MongoDB. Secure, scalable, yours to control.',
     },
     {
         number: '04',

@@ -1,6 +1,6 @@
 const stack = [
   'React', 'Vite', 'Node.js', 'Express',
-  'MongoDB', 'Shopify', 'JavaScript', 'CSS',
+  'MongoDB', 'Shopify', 'JavaScript', 'Tailwind CSS',
 ]
 
 const About = () => {
