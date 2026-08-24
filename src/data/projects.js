@@ -26,8 +26,8 @@ export const projects = [
     url: "https://www.norish.co.il",
     icon: "/icons/norish.png",
     goal: "A clean, modern and artistic web presence built for one of the most well-known coffee shops in Tel Aviv. Focused on artistic design and a smooth user experience.",
-    description: "A clean, modern and artistic web presence built for one of the most well-known coffee shops in Tel Aviv. Focused on artistic design and a smooth user experience.",
-    tags: ["Design", "React", "UI/UX"],
+    description: "MERN stack (MongoDB, Express, React, Node.js) with a React/Vite frontend styled in Tailwind CSS and a separate React admin dashboard, backed by an Express/Node API with JWT authentication, Cloudinary for image management, and MongoDB via Mongoose.",
+    tags: ["Art", "Full-Stack", "React"],
   },
   {
     id: 2,
@@ -48,6 +48,6 @@ export const projects = [
     icon: "/icons/interproduct.png",
     goal: "The client ran everything manually over WhatsApp — orders, deliveries, client meetings — with no digital way to showcase their catalog of 30+ products. </br> I built a custom e-commerce platform with a private, approval-only storefront to protect wholesale pricing, an admin panel for managing products, and automated order and delivery-status notifications for customers.",
     description: "Full-stack B2B e-commerce platform with a Hebrew RTL interface. Built with React, Node/Express and MongoDB, including Cloudinary image management and a separate admin panel for products, orders and users.",
-    tags: ["Full-Stack", "B2B", "React", "MongoDB"],
+    tags: ["Full-Stack", "B2B", "MERN"],
   },
 ]

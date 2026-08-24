@@ -290,6 +290,11 @@ button:focus-visible {
   transition: border-color 0.2s, transform 0.2s;
 }
 
+.portfolio-frame-clickable {
+  display: block;
+  cursor: pointer;
+}
+
 .portfolio-row:hover .portfolio-frame {
   border-color: var(--accent);
   transform: translateY(-4px);
@@ -337,7 +342,7 @@ button:focus-visible {
 .portfolio-frame-body {
   position: relative;
   width: 100%;
-  aspect-ratio: 9 / 18;
+  aspect-ratio: 5 / 9;
   overflow: hidden;
 }
 

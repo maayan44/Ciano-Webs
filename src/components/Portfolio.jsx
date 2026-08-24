@@ -22,7 +22,19 @@ const ProjectRow = ({ project }) => {
     <li className="portfolio-row">
 
       {/* Left: live preview, or a placeholder while the site is in progress */}
-      <div className="portfolio-frame">
+      {(() => {
+        const FrameTag = isLive ? 'a' : 'div'
+        const frameProps = isLive
+          ? {
+              href: project.url,
+              target: '_blank',
+              rel: 'noreferrer',
+              'aria-label': `Visit ${project.name}, opens in a new tab`,
+            }
+          : {}
+
+        return (
+      <FrameTag className={`portfolio-frame${isLive ? ' portfolio-frame-clickable' : ''}`} {...frameProps}>
         <div aria-hidden="true" className="portfolio-frame-bar">
           {project.icon && (
             <span className={`frame-icon${project.iconLight ? ' frame-icon-light' : ''}`}>
@@ -73,7 +85,9 @@ const ProjectRow = ({ project }) => {
             </div>
           )}
         </div>
-      </div>
+      </FrameTag>
+        )
+      })()}
 
       {/* Right: the story and the tech details */}
       <div className="portfolio-info">

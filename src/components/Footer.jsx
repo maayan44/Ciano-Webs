@@ -41,7 +41,6 @@ const Footer = () => {
 
                 <nav aria-label="Social links" className="footer-socials" style={{ display: 'flex', gap: '1.5rem' }}>
                     {[
-                        { label: 'GitHub', url: 'https://github.com/maayan44' },
                         { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maayan-marciano/' },
                         { label: 'WhatsApp', url: 'https://wa.me/972509127255' },
                     ].map((link) => (
