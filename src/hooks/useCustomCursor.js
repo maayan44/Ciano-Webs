@@ -29,8 +29,12 @@ export function useCustomCursor(options = {}) {
 
     const handleMouseDown = () => setClicking(true)
     const handleMouseUp = () => setClicking(false)
-    const handleLeave = () => setVisible(false)
-    const handleEnter = () => setVisible(true)
+    // Window blur/focus (not document mouseleave/mouseenter) is what reliably tells us the
+    // pointer left the browser window — mouseleave also fires when the cursor crosses into a
+    // cross-origin iframe (e.g. a live site preview), with no matching mouseenter on the way
+    // back out, which would permanently hide the cursor the moment it touched one.
+    const handleBlur = () => setVisible(false)
+    const handleFocus = () => setVisible(true)
     const handleHover = () => setHovering(true)
     const handleUnhover = () => setHovering(false)
 
@@ -43,15 +47,15 @@ export function useCustomCursor(options = {}) {
     window.addEventListener('mousemove', handleMove)
     window.addEventListener('mousedown', handleMouseDown)
     window.addEventListener('mouseup', handleMouseUp)
-    document.documentElement.addEventListener('mouseleave', handleLeave)
-    document.documentElement.addEventListener('mouseenter', handleEnter)
+    window.addEventListener('blur', handleBlur)
+    window.addEventListener('focus', handleFocus)
 
     return () => {
       window.removeEventListener('mousemove', handleMove)
       window.removeEventListener('mousedown', handleMouseDown)
       window.removeEventListener('mouseup', handleMouseUp)
-      document.documentElement.removeEventListener('mouseleave', handleLeave)
-      document.documentElement.removeEventListener('mouseenter', handleEnter)
+      window.removeEventListener('blur', handleBlur)
+      window.removeEventListener('focus', handleFocus)
       interactables.forEach((el) => {
         el.removeEventListener('mouseenter', handleHover)
         el.removeEventListener('mouseleave', handleUnhover)
