@@ -8,7 +8,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ciano-webs.vercel.app; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://api.emailjs.com; frame-src https://www.norish.co.il https://norish.co.il https://le-true.com https://interproduct.co.il; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors 'self'"
+          "value": "default-src 'self'; script-src 'self' https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://ciano-webs.vercel.app; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://api.emailjs.com; frame-src https://www.norish.co.il https://norish.co.il https://le-true.com https://interproduct.co.il https://planetbcom.vercel.app; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors 'self'"
         },
         {
           "key": "X-Content-Type-Options",
