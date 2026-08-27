@@ -111,16 +111,16 @@ const ProjectRow = ({ project }) => {
           )}
         </div>
 
-        {project.goal && (
-          <div className="portfolio-goal">
-            <p className="portfolio-goal-label" aria-hidden="true">{project.goalLabel || 'Description'}</p>
-            {project.goal.split(/<\/br>/i).map((paragraph, i) => (
-              <p key={i} className="portfolio-goal-text">{paragraph.trim()}</p>
+        {project.description && (
+          <div className="portfolio-description">
+            <p className="portfolio-description-label" aria-hidden="true">{project.descriptionLabel || 'Description'}</p>
+            {project.description.split(/<\/br>/i).map((paragraph, i) => (
+              <p key={i} className="portfolio-description-text">{paragraph.trim()}</p>
             ))}
           </div>
         )}
 
-        <p className="portfolio-description">{project.description}</p>
+        <p className="portfolio-tech">{project.tech}</p>
 
         <ul
           role="list"
