@@ -16,6 +16,9 @@
  * `icon` is the site's logo/favicon, shown in the browser-chrome bar above the preview.
  * `iconLight` set to true puts the icon on a small light chip — use it for icons that are
  * dark/black themselves and would otherwise disappear against the bar's dark background.
+ *
+ * `goalLabel` overrides the small green label shown above the goal text (defaults to
+ * "Description" when not set).
  */
 
 export const projects = [
@@ -49,5 +52,15 @@ export const projects = [
     goal: "The client ran everything manually over WhatsApp — orders, deliveries, client meetings — with no digital way to showcase their catalog of 30+ products. </br> I built a custom e-commerce platform with a private, approval-only storefront to protect wholesale pricing, an admin panel for managing products, and automated order and delivery-status notifications for customers.",
     description: "Full-stack B2B e-commerce platform with a Hebrew RTL interface. Built with React, Node/Express and MongoDB, including Cloudinary image management and a separate admin panel for products, orders and users.",
     tags: ["Full-Stack", "B2B", "MERN"],
+  },
+  {
+    id: 4,
+    name: "Planet B",
+    status: "for-sale",
+    url: "https://planetbcom.vercel.app/",
+    goalLabel: "Community Site",
+    goal: "DMY-TEXT",
+    description: "DMY-TEXT",
+    tags: ["DMY-TEXT"],
   },
 ]
