@@ -11,7 +11,7 @@ import { projects } from '../data/projects'
 const SECTIONS = [
   { status: 'live', eyebrow: 'Selected Work', title: <>Sites live &amp; <span className="accent">running</span></> },
   { status: 'coming-soon', eyebrow: 'In Progress', title: <>Coming <span className="accent">soon</span></> },
-  { status: 'for-sale', eyebrow: 'On The Market', title: <>Available for <span className="accent">purchase</span></> },
+  { status: 'for-sale', eyebrow: 'Site Ideas', title: <>Available for <span className="accent">purchase</span></> },
 ]
 
 const ProjectRow = ({ project }) => {

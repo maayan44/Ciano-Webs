@@ -58,6 +58,8 @@ export const projects = [
     name: "Planet B",
     status: "for-sale",
     url: "https://planetbcom.vercel.app/home",
+    icon: "/icons/planetb.png",
+    iconLight: true,
     descriptionLabel: "Community Site",
     description: "Magic happens on desktop view (PC / Laptop).</br>An immersive, artistic web presence built for Planet B, an electronic music and events community based in Israel, reflecting the collective's identity through mood and motion rather than a conventional layout. It brings together the community's story into one cohesive, atmospheric experience.",
     tech: "Built entirely with React and Vite, styled with Tailwind CSS, and animated with Framer Motion for smooth page transitions and reactive visual effects. The site features a reactive/generative background system and glitch-text and scramble-caption components built from scratch, with React Router handling navigation.",
