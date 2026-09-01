@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 
 const SERVICE_ID = 'service_u5qvnuq'
@@ -27,42 +27,50 @@ const Contact = () => {
     service_type: '',
     message: '',
   })
-  const [status, setStatus] = useState(null)
+  const [errors, setErrors] = useState({})
+  const [submitStatus, setSubmitStatus] = useState(null)
   const [loading, setLoading] = useState(false)
+
+  const nameRef = useRef(null)
+  const emailRef = useRef(null)
+  const serviceRef = useRef(null)
+  const messageRef = useRef(null)
+  const fieldRefs = { from_name: nameRef, from_email: emailRef, service_type: serviceRef, message: messageRef }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const validate = () => {
+    const next = {}
+    if (!form.from_name.trim()) next.from_name = 'Please enter your name.'
+    if (!form.from_email.trim() || !form.from_email.includes('@')) next.from_email = 'Please enter a valid email address.'
+    if (!form.service_type) next.service_type = 'Please select a service.'
+    if (!form.message.trim()) next.message = 'Please write a message.'
+    return next
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!form.from_name.trim()) {
-      setStatus('name')
-      return
-    }
-    if (!form.from_email.trim() || !form.from_email.includes('@')) {
-      setStatus('email')
-      return
-    }
-    if (!form.service_type) {
-      setStatus('service')
-      return
-    }
-    if (!form.message.trim()) {
-      setStatus('message')
+    const nextErrors = validate()
+    setErrors(nextErrors)
+    setSubmitStatus(null)
+
+    const firstInvalid = ['from_name', 'from_email', 'service_type', 'message'].find((f) => nextErrors[f])
+    if (firstInvalid) {
+      fieldRefs[firstInvalid].current?.focus()
       return
     }
 
     setLoading(true)
-    setStatus(null)
 
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
-      setStatus('success')
+      setSubmitStatus('success')
       setForm({ from_name: '', from_email: '', service_type: '', message: '' })
-    } catch (err) {
-      setStatus('error')
+    } catch {
+      setSubmitStatus('error')
     } finally {
       setLoading(false)
     }
@@ -97,6 +105,7 @@ const Contact = () => {
               <div>
                 <label htmlFor="from_name" className="form-label">Name</label>
                 <input
+                  ref={nameRef}
                   id="from_name"
                   className="form-input"
                   type="text"
@@ -105,14 +114,18 @@ const Contact = () => {
                   value={form.from_name}
                   onChange={handleChange}
                   aria-required="true"
-                  aria-invalid={status === 'name' ? 'true' : 'false'}
-                  aria-describedby={status === 'name' ? 'error-name' : undefined}
+                  aria-invalid={errors.from_name ? 'true' : 'false'}
+                  aria-describedby={errors.from_name ? 'error-name' : undefined}
                   autoComplete="name"
                 />
+                {errors.from_name && (
+                  <p id="error-name" role="alert" className="field-error">✗ {errors.from_name}</p>
+                )}
               </div>
               <div>
                 <label htmlFor="from_email" className="form-label">Email</label>
                 <input
+                  ref={emailRef}
                   id="from_email"
                   className="form-input"
                   type="email"
@@ -121,47 +134,59 @@ const Contact = () => {
                   value={form.from_email}
                   onChange={handleChange}
                   aria-required="true"
-                  aria-invalid={status === 'email' ? 'true' : 'false'}
-                  aria-describedby={status === 'email' ? 'error-email' : undefined}
+                  aria-invalid={errors.from_email ? 'true' : 'false'}
+                  aria-describedby={errors.from_email ? 'error-email' : undefined}
                   autoComplete="email"
+                  spellCheck={false}
                 />
+                {errors.from_email && (
+                  <p id="error-email" role="alert" className="field-error">✗ {errors.from_email}</p>
+                )}
               </div>
             </div>
 
             <div>
               <label htmlFor="service_type" className="form-label">Service</label>
               <select
+                ref={serviceRef}
                 id="service_type"
                 className="form-input"
                 name="service_type"
                 value={form.service_type}
                 onChange={handleChange}
                 aria-required="true"
-                aria-invalid={status === 'service' ? 'true' : 'false'}
-                aria-describedby={status === 'service' ? 'error-service' : undefined}
+                aria-invalid={errors.service_type ? 'true' : 'false'}
+                aria-describedby={errors.service_type ? 'error-service' : undefined}
               >
                 <option value="">What are you looking for?</option>
                 {services.map((s) => (
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
+              {errors.service_type && (
+                <p id="error-service" role="alert" className="field-error">✗ {errors.service_type}</p>
+              )}
             </div>
 
             <div>
               <label htmlFor="message" className="form-label">Message</label>
               <textarea
+                ref={messageRef}
                 id="message"
                 className="form-input"
                 name="message"
-                placeholder="Tell me about your project..."
+                placeholder="Tell me about your project…"
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
                 aria-required="true"
-                aria-invalid={status === 'message' ? 'true' : 'false'}
-                aria-describedby={status === 'message' ? 'error-message' : undefined}
+                aria-invalid={errors.message ? 'true' : 'false'}
+                aria-describedby={errors.message ? 'error-message' : undefined}
                 style={{ resize: 'vertical' }}
               />
+              {errors.message && (
+                <p id="error-message" role="alert" className="field-error">✗ {errors.message}</p>
+              )}
             </div>
 
             <div>
@@ -173,37 +198,17 @@ const Contact = () => {
                 aria-busy={loading}
                 style={{ opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer', border: 'none' }}
               >
-                {loading ? 'Sending...' : 'Send Message'}
+                {loading ? 'Sending…' : 'Send Message'}
               </button>
             </div>
 
             <div aria-live="polite" aria-atomic="true">
-              {status === 'name' && (
-                <p id="error-name" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                  ✗ Please enter your name.
-                </p>
-              )}
-              {status === 'email' && (
-                <p id="error-email" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                  ✗ Please enter a valid email address.
-                </p>
-              )}
-              {status === 'service' && (
-                <p id="error-service" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                  ✗ Please select a service.
-                </p>
-              )}
-              {status === 'message' && (
-                <p id="error-message" role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-                  ✗ Please write a message.
-                </p>
-              )}
-              {status === 'success' && (
+              {submitStatus === 'success' && (
                 <p role="alert" style={{ color: 'var(--accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
                   ✓ Message sent, I'll get back to you soon.
                 </p>
               )}
-              {status === 'error' && (
+              {submitStatus === 'error' && (
                 <p role="alert" style={{ color: '#ff5f57', fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
                   ✗ Something went wrong. Try again or reach out on WhatsApp.
                 </p>

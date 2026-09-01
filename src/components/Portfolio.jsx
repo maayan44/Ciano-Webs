@@ -1,4 +1,5 @@
 import { projects } from '../data/projects'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 /**
  * Renders the work section of the main page, split into up to three
@@ -17,6 +18,7 @@ const SECTIONS = [
 const ProjectRow = ({ project }) => {
   const isLive = project.status === 'live' || (project.status === 'for-sale' && !!project.url)
   const isComingSoon = project.status === 'coming-soon'
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
     <li className="portfolio-row">
@@ -38,7 +40,7 @@ const ProjectRow = ({ project }) => {
         <div aria-hidden="true" className="portfolio-frame-bar">
           {project.icon && (
             <span className={`frame-icon${project.iconLight ? ' frame-icon-light' : ''}`}>
-              <img src={project.icon} alt="" />
+              <img src={project.icon} alt="" width="56" height="20" />
             </span>
           )}
           <span className="frame-url">
@@ -61,15 +63,19 @@ const ProjectRow = ({ project }) => {
               src={project.previewVideo}
               aria-label={`Preview of ${project.name}`}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              autoPlay
+              autoPlay={!prefersReducedMotion}
               muted
-              loop
+              loop={!prefersReducedMotion}
               playsInline
+              controls={prefersReducedMotion}
             />
           ) : project.previewImage ? (
             <img
               src={project.previewImage}
               alt={`Preview of ${project.name}`}
+              width="400"
+              height="720"
+              loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (

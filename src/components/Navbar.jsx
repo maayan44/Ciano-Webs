@@ -49,7 +49,7 @@ const Navbar = () => {
     borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
     background: scrolled ? 'rgba(10,10,10,0.95)' : 'transparent',
     backdropFilter: scrolled ? 'blur(12px)' : 'none',
-    transition: 'all 0.3s ease',
+    transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
   }
 
   const containerStyle = {
@@ -119,7 +119,6 @@ const Navbar = () => {
           <div
             id="mobile-menu"
             className="nav-mobile-menu"
-            role="menu"
             aria-label="Mobile navigation"
           >
             {['Services', 'Work', 'About'].map((item) => (
@@ -127,7 +126,6 @@ const Navbar = () => {
                 key={item}
                 href={'#' + item.toLowerCase()}
                 className="nav-mobile-link"
-                role="menuitem"
                 onClick={() => setMenuOpen(false)}
               >
                 {item}
@@ -136,7 +134,6 @@ const Navbar = () => {
             <a
               href="#contact"
               className="nav-cta"
-              role="menuitem"
               onClick={() => setMenuOpen(false)}
               aria-label="Let's Talk, go to contact section"
             >

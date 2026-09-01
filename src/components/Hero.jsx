@@ -1,4 +1,5 @@
 import { useTypewriter } from '../hooks/useTypewriter'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 const phrases = [
   'custom websites.',
@@ -9,6 +10,7 @@ const phrases = [
 
 const Hero = () => {
   const { displayed, phraseIndex } = useTypewriter(phrases)
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
     <section
@@ -101,7 +103,7 @@ const Hero = () => {
               background: 'var(--accent)',
               marginLeft: '2px',
               verticalAlign: 'middle',
-              animation: 'blink 1s step-end infinite',
+              animation: prefersReducedMotion ? 'none' : 'blink 1s step-end infinite',
             }}
           />
           {/* Screen reader only, announces the full phrase rather than the mid type characters */}

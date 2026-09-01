@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 /**
  * Tracks the mouse position, click state, and whether the pointer is
@@ -17,6 +18,7 @@ export function useCustomCursor(options = {}) {
   const [hovering, setHovering] = useState(false)
 
   const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   // Attaches listeners for pointer movement, clicks, and hover state
   useEffect(() => {
@@ -63,9 +65,16 @@ export function useCustomCursor(options = {}) {
     }
   }, [isTouchDevice])
 
-  // Runs an animation loop that eases the trail position toward the raw position
+  // Runs an animation loop that eases the trail position toward the raw position.
+  // Reduced-motion visitors get the trail snapped straight to the pointer instead.
   useEffect(() => {
     if (isTouchDevice) return
+
+    if (prefersReducedMotion) {
+      const frame = requestAnimationFrame(() => setTrail(pos))
+      return () => cancelAnimationFrame(frame)
+    }
+
     let animFrame
     const animate = () => {
       setTrail((prev) => ({
@@ -76,7 +85,7 @@ export function useCustomCursor(options = {}) {
     }
     animFrame = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(animFrame)
-  }, [pos, isTouchDevice, followSpeed])
+  }, [pos, isTouchDevice, followSpeed, prefersReducedMotion])
 
   return { pos, trail, visible, clicking, hovering, isTouchDevice }
 }
